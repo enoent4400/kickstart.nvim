@@ -167,6 +167,12 @@ vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = 'Save file' })
 vim.keymap.set('n', '<leader>q', ':q<CR>', { desc = 'Quit' }) -- quit
 vim.keymap.set('n', '<leader>Q', ':qa!<CR>', { desc = 'Quit all' }) -- quit all without saving
 vim.keymap.set('n', '<leader>wq', ':wq<CR>', { desc = 'Save and quit' }) -- save and quit
+-- Paste on new line above with indentation
+vim.keymap.set('n', 'P', 'O<ESC>p==', { noremap = true })
+
+-- Paste on new line below with indentation
+vim.keymap.set('n', '<C-p>', 'o<ESC>p==', { noremap = true })
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
