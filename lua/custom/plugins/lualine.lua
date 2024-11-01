@@ -135,6 +135,9 @@ return {
         'filename',
         cond = conditions.buffer_not_empty,
         color = { fg = colors.magenta, gui = 'bold' },
+        -- display the file path 
+        path = 1,
+        file_status = true,
       }
 
       ins_left { 'location' }

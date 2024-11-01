@@ -1,7 +1,6 @@
 --[[
 
 =====================================================================
-==================== READ THIS BEFORE CONTINUING ====================
 =====================================================================
 ========                                    .-----.          ========
 ========         .----------------------.   | === |          ========
@@ -392,7 +391,8 @@ require('lazy').setup({
       require('telescope').setup {
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
-        --
+
+        path_display = { 'truncate', 'smart'},
         -- defaults = {
         --   mappings = {
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
@@ -872,30 +872,59 @@ require('lazy').setup({
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
+
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
-    -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-    opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
-      -- Autoinstall languages that are not installed
-      auto_install = true,
-      highlight = {
-        enable = true,
-        -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-        --  If you are experiencing weird indenting issues, add the language to
-        --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        additional_vim_regex_highlighting = { 'ruby' },
-      },
-      indent = { enable = true, disable = { 'ruby' } },
+    main = 'nvim-treesitter.configs',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
     },
-    -- There are additional nvim-treesitter modules that you can use to interact
-    -- with nvim-treesitter. You should go explore a few and see what interests you:
-    --
-    --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-    --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-    --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+    opts = {
+      -- Previous config remains the same...
+      textobjects = {
+        move = {
+          enable = true,
+          set_jumps = true,
+          goto_next_start = {
+            [']f'] = '@function.outer',
+            [']c'] = '@class.outer',
+            [']b'] = '@block.outer', -- Added for general code blocks
+            [']s'] = '@statement.outer', -- Added for statements (if, for, etc)
+          },
+          goto_next_end = {
+            [']F'] = '@function.outer',
+            [']C'] = '@class.outer',
+            [']B'] = '@block.outer', -- Added for general code blocks
+            [']S'] = '@statement.outer', -- Added for statements
+          },
+          goto_previous_start = {
+            ['[f'] = '@function.outer',
+            ['[c'] = '@class.outer',
+            ['[b'] = '@block.outer', -- Added for general code blocks
+            ['[s'] = '@statement.outer', -- Added for statements
+          },
+          goto_previous_end = {
+            ['[F'] = '@function.outer',
+            ['[C'] = '@class.outer',
+            ['[B'] = '@block.outer', -- Added for general code blocks
+            ['[S'] = '@statement.outer', -- Added for statements
+          },
+        },
+        select = {
+          enable = true,
+          lookahead = true,
+          keymaps = {
+            ['af'] = '@function.outer',
+            ['if'] = '@function.inner',
+            ['ac'] = '@class.outer',
+            ['ic'] = '@class.inner',
+            ['ab'] = '@block.outer', -- Added for general code blocks
+            ['ib'] = '@block.inner', -- Added for general code blocks
+          },
+        },
+      },
+    },
   },
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
