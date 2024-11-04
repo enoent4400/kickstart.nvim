@@ -15,6 +15,8 @@ return {
           vim.keymap.set(mode, l, r, opts)
         end
 
+        -- set default git blame toggle to on
+        gitsigns.toggle_current_line_blame()
         -- Navigation
         map('n', ']c', function()
           if vim.wo.diff then

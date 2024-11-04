@@ -4,11 +4,6 @@
 -- See the kickstart.nvim README for more information
 return {
   {
-    'm4xshen/hardtime.nvim',
-    dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
-    opts = {},
-  },
-  {
     'karb94/neoscroll.nvim',
     config = function()
       require('neoscroll').setup {}
