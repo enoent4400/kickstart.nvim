@@ -85,6 +85,17 @@ P.S. You can delete this when you're done too. It's your config now! :)
 if vim.g.vscode then
   print 'VSCode environment detected'
 end
+if vim.g.neovide then
+  vim.g.neovide_window_blurred = true
+  vim.g.neovide_floating_shadow = true
+  vim.g.neovide_floating_z_height = 10
+  vim.g.neovide_light_angle_degrees = 45
+  vim.g.neovide_light_radius = 5
+  vim.g.neovide_refresh_rate = 60
+  vim.g.neovide_confirm_quit = true
+  vim.g.neovide_show_border = true
+  vim.g.neovide_fullscreen = false
+end
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -847,6 +858,13 @@ require('lazy').setup({
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
     end,
+  },
+  {
+    'nyoom-engineering/oxocarbon.nvim',
+    -- Add in any other configuration;
+    --   event = foo,
+    --   config = bar
+    --   end,
   },
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },

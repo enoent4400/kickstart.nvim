@@ -52,6 +52,17 @@ return {
         end,
         desc = 'ToggleTerm (tab cwd_dir)',
       },
+      {
+        '<leader>Tx',
+        '<cmd>ToggleTermCloseAll<cr>',
+        desc = 'Close all terms',
+      },
+      {
+        -- open new terminal
+        '<leader>tt',
+        '<cmd>ToggleTerm<cr>',
+        desc = 'ToggleTerm',
+      }
     },
     opts = {
       -- size can be a number or function which is passed the current terminal
